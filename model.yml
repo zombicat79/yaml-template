@@ -12,5 +12,7 @@ jobs: #The 'jobs' key (strict) is used to define the list of Jobs our Workflow c
     #Each step is preceded by a dash (-) symbol and a space
       - name: #The 'name' key (strict) holds the name given to our Step
         run: #The 'run' key (strict) contains a CLI command to be executed
-      - name:
-        run:
+      - name: 
+        run: | #The pipe symbol (|) can be given in case several CLI commands must be run
+        #CLI command 1 (with indentation)
+        #CLI command 2 (with indentation)
