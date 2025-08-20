@@ -2,6 +2,7 @@
 
 name: My Workflow #The 'name' key (strict) is the first one to be defined. It holds the name given to our Workflow
 on: workflow_dispatch #The 'on' key (strict) defines a trigger for our Workflow. Triggers can be manual or automatic. 'workflow_dispatch' is a manual trigger
+# A complete list of trigger events can be found on 'https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows#push'
 jobs: #The 'jobs' key (strict) is used to define the list of Jobs our Workflow comprises (at least 1)
 #After the 'jobs' key indentation is required to define our list of Jobs
   first-job: #The actual name of the job is defined with a variable key (free choice, it can be anything we find most suitable)
@@ -16,3 +17,8 @@ jobs: #The 'jobs' key (strict) is used to define the list of Jobs our Workflow c
         run: | #The pipe symbol (|) can be given in case several CLI commands must be run
         #CLI command 1 (with indentation)
         #CLI command 2 (with indentation)
+      - name:
+        uses: actions/checkout@v3 #The 'uses' key (strict) can be specified to run actions (pre-built common task applications) instead of CLI commands
+        # A complete list of actions can be found on the marketplace 'https://github.com/marketplace?type=actions'
+        with: #The 'with' key (strict) can be defined to fine-tune actions with some particular config options provided in their docs
+          # config option keys must be indented
