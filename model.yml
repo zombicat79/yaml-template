@@ -2,6 +2,7 @@
 
 name: My Workflow #The 'name' key (strict) is the first one to be defined. It holds the name given to our Workflow
 on: workflow_dispatch #The 'on' key (strict) defines a trigger for our Workflow. Triggers can be manual or automatic. 'workflow_dispatch' is a manual trigger
+# A multiplicity of trigger events can be specified by listing them in an array [trigger1, trigger2, triggern]
 # A complete list of trigger events can be found on 'https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows#push'
 jobs: #The 'jobs' key (strict) is used to define the list of Jobs our Workflow comprises (at least 1)
 #After the 'jobs' key indentation is required to define our list of Jobs
@@ -22,3 +23,14 @@ jobs: #The 'jobs' key (strict) is used to define the list of Jobs our Workflow c
         # A complete list of actions can be found on the marketplace 'https://github.com/marketplace?type=actions'
         with: #The 'with' key (strict) can be defined to fine-tune actions with some particular config options provided in their docs
           # config option keys must be indented
+  second-job: # By default jobs are run in parallel (which is not always ideal, since some jobs should depend on the result of others)
+    needs: #The 'needs' key (strict) makes a job run sequentially, after the job identifiers given as a value (e. g. first-job)
+    #If a job depends on a multiplicity of other jobs, those must be included in an array [job1, job2, jobn]
+    runs-on: #...
+    steps: #...
+      - name: #...
+        run: #...
+      - name:
+        uses: actions/checkout@v3
+        with: #...
+          #...
