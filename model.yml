@@ -1,9 +1,20 @@
 # Below follows a base example for a YAML configuration file with explanations
 
 name: My Workflow #The 'name' key (strict) is the first one to be defined. It holds the name given to our Workflow
-on: workflow_dispatch #The 'on' key (strict) defines a trigger for our Workflow. Triggers can be manual or automatic. 'workflow_dispatch' is a manual trigger
+on: push #The 'on' key (strict) defines a trigger for our Workflow. Triggers can be manual or automatic. 'workflow_dispatch' is a manual trigger
 # A multiplicity of trigger events can be specified by listing them in an array [trigger1, trigger2, triggern]
-# A complete list of trigger events can be found on 'https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows#push'
+# A complete list of trigger events can be found on 'https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows'
+# Trigger events can also be specified in a way that expresses more detailed or fine-grained control, as per shown below:
+  pull_request: # This more ingrained syntax can be used instead of an array, when needing to define multiple triggers along with more nuanced config
+    types: # Some trigger events can have different activity types (opened, closed, etc), which focus on specific types or statuses of the targeted event.
+      # Activity types can be included in an array, but they can also be written in a list format:
+      - opened
+  workflow_dispatch: # Another trigger event (within a multiplicity of nuanced trigger events)
+  push:
+    branches: # Some trigger events can have different filters (branches, etc), which focus on specific parts or elements of the repository.
+      # Pushes to the repository will only trigger the workflow if done against the branches listed below:
+      - main
+      - master
 jobs: #The 'jobs' key (strict) is used to define the list of Jobs our Workflow comprises (at least 1)
 #After the 'jobs' key indentation is required to define our list of Jobs
   first-job: #The actual name of the job is defined with a variable key (free choice, it can be anything we find most suitable)
