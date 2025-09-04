@@ -15,10 +15,21 @@ on: push #The 'on' key (strict) defines a trigger for our Workflow. Triggers can
       # Pushes to the repository will only trigger the workflow if done against the branches listed below:
       - main
       - master
+env: # #The 'env' key (strict) is used to store any environment variables that should be available across the entire workflow
+  DATABASE_NAME: some_name #key-value pairs are entirely at our discretion
+  # env variables can be stored as secrets in the repository settings
+  # Reading environment variables later on can be achieved by using either of the following syntaxes:
+  # $DATABASE_NAME
+  # ${{ env.DATABASE_NAME }}
+  # Using secrets in workflows can be achieved by specifing the following syntax as the value for the corresponding env variable: ${{ secrets.DATABASE_NAME }}
 jobs: #The 'jobs' key (strict) is used to define the list of Jobs our Workflow comprises (at least 1)
 #After the 'jobs' key indentation is required to define our list of Jobs
   first-job: #The actual name of the job is defined with a variable key (free choice, it can be anything we find most suitable)
   #After job names indentation is required to define job configurations
+    environment: some_environment #The 'environment' key (strict) is used to reference a precise environment defined within the repository settings...
+    # ...if present the env variables used will be those belonging to the referred environment
+    env: # #The 'env' key (strict) can aldo be used at job level (even step), to store any environment variables that should be available only to that job
+      DATABASE_ADDRESS: some_address #key-value pairs are entirely at our discretion
     runs-on: #The 'runs-on' key (strict) defines the machines and type of environments where our jobs and steps will be actually run (e. g. ubuntu-latest)
     steps: #The 'steps' key (strict) to define the list of Steps our Job comprises (at least 1)
     #After the 'steps' key indentation is required to define our list of Steps
